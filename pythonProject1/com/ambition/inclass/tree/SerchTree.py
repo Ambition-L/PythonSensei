@@ -77,7 +77,7 @@ class TreeNode:
 
         # 如果目标节点大于当前节点 进入右子树 并且当前节点作为最大前驱
         if val > node.val:
-            return self.searchFirstQ(node.right, val, node.val)
+            return self.searchFirstQ(node.right, val, node.right.val)
 
     # 寻找二叉搜索树中某个节点的后继节点 （比当前节点大的所有节点中最小的一个节点）
     # 如果目标节点没有右子树 那么它的后继节点一定在根节点到目标节点的路径上
@@ -105,7 +105,7 @@ class TreeNode:
 
         # 目标节点比当前节点小 进入左子树 并且当前节点作为最小后继
         if val < node.val:
-            return self.searchLastJ(node.left, val, node.val)
+            return self.searchLastJ(node.left, val, node.left.val)
 
     # 删除节点数据
     # 如果被删除节点的子节点树小于2，则直接删除 将被删除节点改为被删除节点的右右节点 无右节点改为子节点 无子节点直接删除
@@ -167,7 +167,7 @@ class TreeNode:
                     next = temp.left
                     # 寻找后继节点
                     while next.left is not None:
-                        # 更新右子树
+                        # 更新后继节点的父节点
                         temp = next
                         # 更新后继节点的值
                         next = next.left

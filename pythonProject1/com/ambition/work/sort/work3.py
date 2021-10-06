@@ -1,4 +1,4 @@
-## 课后练习第五题
+# 课后练习第五题 暴力解法
 
 # n个数据
 a = input("请输入n：")
@@ -14,6 +14,13 @@ for i in range(0, int(a)):
 # 定义记录逆序对的整数
 count = 0
 
+#  暴力解法 把每个数都与这个数的后一个数进行比较 如果比后面的数大就记录
+# for i in range(0, len(nums)):
+#     for j in range(i + 1, len(nums)):
+#         if nums[i] > nums[j]:
+#             count += 1
+
+
 def work3(num):
     global count
     if len(num) <= 1:
@@ -21,7 +28,7 @@ def work3(num):
     mid = int(len(num) / 2)
     llist, rlist = work3(num[:mid]), work3(num[mid:])
     result = []
-    i, j = 0, 0,
+    i, j = 0, 0
     while i < len(llist) and j < len(rlist):
         if rlist[j] < llist[i]:
             result.append(rlist[j])
@@ -31,9 +38,17 @@ def work3(num):
         else:
             result.append(llist[i])
             i += 1
+            # 每次左数组指针移动时 重新比较右数据数据 （将右数组指针重制为0）
+            j = 0
+
+
+    # 如果左边集合未比较完 则把未比较完的次数累计添加上
+    if i < len(llist):
+        count += (len(llist) - 1 - i) * len(rlist)
+
     result += llist[i:] + rlist[j:]
     return result
 
 
-print(work3(nums))
+work3(nums)
 print(count)
